@@ -52,6 +52,13 @@ namespace SamerCs.Web.Startup
                         url: "About",
                         icon: "info"
                     )
+                ).AddItem(
+                    new MenuItemDefinition(
+                        PageNames.Tasks,
+                        L("Tasks"),
+                        url: "Tasks",
+                        icon: "list"
+                    )
                 ).AddItem( // Menu items below is just for demonstration!
                     new MenuItemDefinition(
                         "MultiLevelMenu",

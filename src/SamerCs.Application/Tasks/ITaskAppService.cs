@@ -7,5 +7,6 @@ namespace SamerCs.Tasks
     public interface ITaskAppService : IApplicationService
     {
         IList<TaskVm> GetAll();
+        TaskVm Create(TaskVm taskVm);
     }
 }

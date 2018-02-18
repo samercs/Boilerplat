@@ -18,8 +18,13 @@ namespace SamerCs.Tasks
         public IList<TaskVm> GetAll()
         {
             var allTasks = _repository.GetAll().ToList();
-            var result = Mapper.Map<List<Task>, List<TaskVm>>(allTasks);
-            return result;
+            return ObjectMapper.Map<List<TaskVm>>(allTasks);
+        }
+
+        public TaskVm Create(TaskVm taskVm)
+        {
+            var task = ObjectMapper.Map<Task>(taskVm);
+            return ObjectMapper.Map<TaskVm>(_repository.Insert(task));
         }
     }
 }

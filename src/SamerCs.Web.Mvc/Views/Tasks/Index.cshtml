@@ -1,0 +1,72 @@
+﻿
+@using SamerCs.TaskModel
+@model SamerCs.Web.Models.Tasks.IndexVm
+@{
+    ViewBag.Title = L("Tasks");
+    ViewBag.ActiveMenu = "Tasks";
+}
+
+<h2>Tasks</h2>
+
+<div class="row">
+    <div>
+        <ul class="list-group">
+            @foreach (var task in Model.Tasks)
+            {
+                <li class="list-group-item">
+                    @if (task.State == TaskState.Open)
+                    {
+                        <span class="pull-right label label-success">@L($"TaskState_{task.State}")</span>
+                    }
+                    else
+                    {
+                        <span class="pull-right label label-info">@L($"TaskState_{task.State}")</span>
+                    }
+                    <h4 class="list-group-item-heading">@task.Title</h4>
+                    <div class="list-group-item-text">
+                        @task.CreationTime.ToString("yyyy-MM-dd HH:mm:ss")
+                    </div>
+                </li>
+            }
+        </ul>
+        <button type="button" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" data-toggle="modal" data-target="#UserCreateModal">
+            <i class="material-icons">add</i>
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="UserCreateModal" tabindex="-1" role="dialog" aria-labelledby="UserCreateModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <span>@L("CreateNewTask")</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form name="userCreateForm" asp-action="Add" role="form" novalidate class="form-validation">
+                    
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane animated fadeIn active" id="create-user-details">
+                            <div class="row clearfix" style="margin-top:10px;">
+                                <div class="col-sm-12">
+                                    <div class="form-group form-float">
+                                        <div class="form-line">
+                                            <input class="form-control" type="text" name="title" required  minlength="2">
+                                            <label class="form-label">@L("Title")</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">@L("Cancel")</button>
+                        <button type="submit" class="btn btn-primary waves-effect">@L("Save")</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
